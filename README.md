@@ -9,8 +9,8 @@ Python web scraping and emailing code of bank FX rates in Mongolia.
 
 # To run the code:
 
-Go to cmd. Press Windows button + R. Type 'cmd'. 
-On cmd, put the folder with above files into current directory as: cd 'your folder path here, sth like: C\myfolder\bankrate.'
-then type 'python Rates.py'
+- Go to cmd. Press Windows button + R. Type 'cmd'. 
+- On cmd, put the folder with above files into current directory as: cd 'your folder path here, sth like: C\myfolder\bankrate.'
+- then type 'python Rates.py'
 
 
