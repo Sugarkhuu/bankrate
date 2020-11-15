@@ -13,12 +13,14 @@ def main():
     start_time = time.time()
     df_old = pd.read_pickle('last_data')
     t0=df_old.iloc[0,0]
-    t1=str(datetime.datetime.now()+timedelta(hours=6))[0:19]
+    t1=str(datetime.datetime.now())[0:19]
     df_new=bar.main()
-    # pdb.set_trace()
-    names=list(df_new)[-6:]
+    #df_new = df_old.drop('Time',axis=1)
+    #pdb.set_trace()
+    names=['Golomt','Khaan','TDB','Xac','State']
     df_diff=df_new[names]-df_old[names]
-    if df_diff[names].sum().sum()!=0:
+    if True:
+    #if df_diff[names].sum().sum()!=0:
         df_new.insert(loc=0, column='Time', value=t1)
         df_to_save=df_new.copy()
         df_send=df_new.copy()

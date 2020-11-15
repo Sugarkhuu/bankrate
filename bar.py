@@ -29,7 +29,7 @@ from dateutil import tz
 import pdb
 
 chrome_options = Options()
-chrome_options.add_argument("--headless")
+#chrome_options.add_argument("--headless")
 
 #Road to 4 bonds maturing in 2023-2024 are closed as there's empty range before. To get my results, run the code once with 2022-12-14 - 2025-01-01 range. I'll figure out
 #better way to handle ranges :)
@@ -43,19 +43,19 @@ def main():
     driver.implicitly_wait(20)
     
     
-    urls=["Golomt","https://www.golomtbank.com/en/home/ratesForSites/",
+    urls=["Golomt","https://www.golomtbank.com/en/exchange",
            "Khaan", "https://www.khanbank.com/mn/personal/currency-rate",
            "TDB", "http://www.tdbm.mn/en/exchange",
            "Xac", "https://www.xacbank.mn/calculator/rates?lang=en",
-           "UBCB", "http://www.ubcbank.mn/index.php?con=rate",
-           "State", "https://statebank.mn/w/en/hanshcalc"]
+           # "UBCB", "http://www.ubcbank.mn/index.php?con=rate",
+           "State", "https://statebank.mn/pages/exchange"]
     
-    tables=["//*[@id='ratesdata']/tbody/tr[1]/td[1]",
+    tables=["//*[@id='__next']/div[2]/section[1]/div/div/div[2]/table/tbody/tr[1]/td[1]",
             "/html/body/app-root/app-site-container/app-currency-rate-page/section/div/div[3]/div/div[2]/table/tbody/tr[1]/td[1]",
             "//*[@id='exchange-table-result']/table/tbody/tr[3]/td[1]",
             "//*[@id='rate_table']/tbody/tr[1]/td[1]",
-             "//*[@id='liRateHist']/div/table/tbody/tr[4]/td[1]", 
-            "//*[@id='expad']/table/tbody/tr[2]/td[1]/div/table/tbody/tr[3]/td[1]"]
+            # "//*[@id='liRateHist']/div/table/tbody/tr[4]/td[1]", 
+            "/html/body/div[3]/div/div[1]/table/tbody/tr[1]/td[1]"]
 
     df=pd.DataFrame({'Валютын код': [],'(C)ash/(N)on(C)ash': [],'(B)uy/(S)ell': []})
     for bank in range(0,len(urls)//2):
@@ -66,25 +66,25 @@ def main():
         lrc="".join(lrc)
         lcc=lggt[0:len(lggt)-3]
         lcc="".join(lcc)
-        if bank in (2,5):
+        if bank == 2:
             mag1=2
             mag2=0
         else:
-            if bank==4:
-                mag1=3
-                mag2=7
-            else:
-                mag1=0
-                mag2=0
+            mag1=0
+            mag2=0
         
 
         driver.get(gg)
-        
+        #pdb.set_trace()
         rc=len(driver.find_elements_by_xpath(lrc))-mag2
+        #if bank ==0:
+            #driver.find_element_by_xpath("//*[@id='__next']/div[2]/section[1]/div/div/div[1]/div/div[2]/div[2]/div/div/div[2]/div[2]/div[2]/div[7]").click()
+            #driver.find_element_by_xpath("//*[@id='__next']/div[2]/section[1]/div/div/div[1]/div/div[1]/div/input").clear()
+            #driver.find_element_by_xpath("//*[@id='__next']/div[2]/section[1]/div/div/div[1]/div/div[1]/div/input").send_keys("11/14/2020")
         cc=len(driver.find_elements_by_xpath(lcc))
         
         print("Bank number: ", bank)
-
+        #pdb.set_trace()
         my_list=[]
         currency_code=[]
         for n in range(1+mag1,rc+1):        
@@ -92,16 +92,17 @@ def main():
                 lggt[len(ggt)-8]=str(n)
                 lggt[len(ggt)-2]=str(m)
                 path="".join(lggt)
-                lggt[len(ggt)-2]=str(1)
-                c_path="".join(lggt)
+                lggt[len(ggt)-2]=str(1) if bank != 0 else str(3)
+                #c_path="".join(lggt)
+                c_path="".join(lggt) if bank != 0 else "".join(lggt)
+                # + '/strong'
                 table_data=driver.find_element_by_xpath(path).text.replace(",","")
                 if table_data=="-":
                     table_data=0
                 else:
                     table_data=float(table_data)
+                #pdb.set_trace()
                 cur_code=driver.find_element_by_xpath(c_path).text
-                if bank==4:
-                    cur_code=cur_code[-3:]
                     
                 my_list.append(table_data)
                 currency_code.append(cur_code)

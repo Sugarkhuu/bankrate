@@ -5,8 +5,10 @@ Created on Tue Oct  2 22:49:20 2018
 @author: Sugar2
 """
 
-mail_list=["",""]
+import getpass
+
+mail_list=[""]
 
 From = ""
-PASSWORD = ""
-To='I will not tell you'
+PASSWORD =  getpass.getpass('Enter your email password:')
+#To=''
