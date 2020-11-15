@@ -83,7 +83,7 @@ def main():
             #driver.find_element_by_xpath("//*[@id='__next']/div[2]/section[1]/div/div/div[1]/div/div[1]/div/input").send_keys("11/14/2020")
         cc=len(driver.find_elements_by_xpath(lcc))
         
-        print("Bank number: ", bank)
+        print("Bank name: ", urls[2*bank])
         #pdb.set_trace()
         my_list=[]
         currency_code=[]

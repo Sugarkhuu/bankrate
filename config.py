@@ -7,8 +7,8 @@ Created on Tue Oct  2 22:49:20 2018
 
 import getpass
 
-mail_list=[""]
+mail_list=["sugarkhuul@gmail.com"] # list of emails to send the info to
 
-From = ""
+From = "sugarkhuul@gmail.com" # the email address to send the info from
 PASSWORD =  getpass.getpass('Enter your email password:')
-#To=''
+To=''

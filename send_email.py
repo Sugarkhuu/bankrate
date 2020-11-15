@@ -20,7 +20,7 @@ class send:
         mymsg = df.to_html()
         # Create message container - the correct MIME type is multipart/alternative.
         msg = MIMEMultipart('alternative')
-        msg['Subject'] = "There is a change!!! Previous %s and now %s" %(t0,t1)
+        msg['Subject'] = "We updated, but didn't check for changes. Just sending!!! Previous %s and now %s" %(t0,t1)
         msg['From'] = config.From
         msg['To'] = config.To
         # msg['CC'] = config.To
