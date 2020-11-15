@@ -29,7 +29,7 @@ from dateutil import tz
 import pdb
 
 chrome_options = Options()
-#chrome_options.add_argument("--headless")
+chrome_options.add_argument("--headless")
 
 #Road to 4 bonds maturing in 2023-2024 are closed as there's empty range before. To get my results, run the code once with 2022-12-14 - 2025-01-01 range. I'll figure out
 #better way to handle ranges :)
