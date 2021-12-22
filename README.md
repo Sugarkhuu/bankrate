@@ -13,4 +13,4 @@ Python web scraping and emailing code of bank FX rates in Mongolia.
 - On cmd, put the folder with above files into current directory as: cd 'your folder path here, sth like: C\myfolder\bankrate.'
 - then type 'python Rates.py'. It'll collect all the FX rates from banks' web and send as an email. Alongside, it should be creating two database named 'last_data' and 'historical_data'.  
 
-Thank you very much.
+Thank you very machte.
